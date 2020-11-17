@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     gfortran \
     git \
     gcovr \
-    python2.7 \
+    python \
     autoconf \
     automake \
     libtool \
