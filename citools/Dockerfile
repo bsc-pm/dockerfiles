@@ -16,4 +16,5 @@ RUN apt-get update && apt-get install -y \
     cmake \
     pkg-config \
     libglib2.0-dev \
+    bzip2 \
     && rm -rf /var/lib/apt/lists/*
