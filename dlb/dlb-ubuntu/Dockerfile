@@ -1,15 +1,12 @@
 FROM ubuntu:24.10
 ARG DLB_VERSION="git"
 
-USER root
 SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
-USER root
 # Installing necessary dependencies
 RUN apt-get -qq update && \
     apt-get -qq -y install \
-        # basics
         build-essential \
         software-properties-common \
         cmake \
@@ -25,26 +22,22 @@ RUN apt-get -qq update && \
         python3 \
         wget \
         libomp5-19 \
-        unzip
+        unzip \
+    && rm -rf /var/lib/apt/lists/*
 
-USER ubuntu
-
-RUN mkdir -p /home/ubuntu/dlb && \
-    cd /home/ubuntu/dlb && \
+RUN cd /usr/local/src && \
     if [ "${DLB_VERSION}" = "git" ]; then \
         wget https://github.com/bsc-pm/dlb/archive/refs/heads/main.zip && \
         unzip main.zip && \
-        cd dlb-main ;\
+        cd dlb-main ; \
     else \
         wget https://github.com/bsc-pm/dlb/archive/refs/tags/v${DLB_VERSION}.tar.gz && \
         tar -xf v${DLB_VERSION}.tar.gz && \
         cd dlb-${DLB_VERSION} ; \
     fi && \
     ./bootstrap && \
-    ./configure --with-mpi --prefix=/home/ubuntu/dlb --with-papi && \
-    make -j $(($(nproc)-1)) && make install
+    ./configure --with-mpi --prefix=/usr/local --with-papi && \
+    make -j $(($(nproc)-1)) && \
+    make install
 
-ENV PATH="${PATH}:/home/ubuntu/dlb/bin"
-ENV DLB_HOME="/home/ubuntu/dlb"
-
-WORKDIR /home/ubuntu
+ENV DLB_HOME="/usr/local"
