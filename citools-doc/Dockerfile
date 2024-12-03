@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
     doxygen \
     graphviz \
     python3-sphinx \
+    python3-sphinxcontrib-mermaid \
     texlive-latex-extra \
     texlive-fonts-recommended \
     latexmk \
