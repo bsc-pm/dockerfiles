@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     graphviz \
     python3-sphinx \
     python3-sphinxcontrib-mermaid \
+    python3-msmb-theme \
     texlive-latex-extra \
     texlive-fonts-recommended \
     latexmk \
