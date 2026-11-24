@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM debian:trixie-slim
 
 RUN apt-get update && apt-get install -y \
     clang \
@@ -18,4 +18,6 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     libglib2.0-dev \
     bzip2 \
+    meson \
+    ninja-build \
     && rm -rf /var/lib/apt/lists/*
